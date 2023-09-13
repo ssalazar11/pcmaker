@@ -17,7 +17,6 @@
                 <span class="fs-4">Admin Panel</span>
             </a>
             <hr />
-            71
             <ul class="nav flex-column">
                 <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">- Admin -
                         Home</a></li>

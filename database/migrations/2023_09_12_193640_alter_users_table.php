@@ -9,11 +9,9 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void{
-        Schema::table('users', function(Blueprint $table){
-            $table->string('role')->default('client');
-            $table->integer('balance');
-        });
+    public function up(): void
+    {
+        //
     }
 
     /**
@@ -21,6 +19,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        
+        Schema::table('users', function(Blueprint $table){
+            $table->dropColumn(['address']);
+            $table->dropColumn(['telephone']);
+        });
     }
 };

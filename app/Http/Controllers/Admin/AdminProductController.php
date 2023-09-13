@@ -12,7 +12,7 @@ class AdminProductController extends Controller
     {
         $viewData = [];
         $viewData["title"] = "Admin Page - Products - Online Store";
-        //  $viewData["products"] = Product::all();
+        $viewData["products"] = Product::all();
         return view('admin.product.index')->with("viewData", $viewData);
     }
 
@@ -25,12 +25,12 @@ class AdminProductController extends Controller
             'image' => 'image',
         ]);
 
-        //$newProduct = new Product();
-       // $newProduct->setName($request->input('name'));
-       // $newProduct->setDescription($request->input('description'));
-       // $newProduct->setPrice($request->input('price'));
-       // $newProduct->setImage("game.png");
-       // $newProduct->save();
+        $newProduct = new Product();
+        $newProduct->setName($request->input('name'));
+        $newProduct->setDescription($request->input('description'));
+        $newProduct->setPrice($request->input('price'));
+        $newProduct->setAvailability($request->input('availability'));
+        $newProduct->save();
 
         return back();
     }

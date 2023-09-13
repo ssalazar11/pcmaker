@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-3 row">
-                        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Name:</label>
+                        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Nm:</label>
                         <div class="col-lg-10 col-md-6 col-sm-12">
                             <input name="name" value="{{ old('name') }}" type="text" class="form-control">
                         </div>
@@ -27,9 +27,17 @@
                 </div>
                 <div class="col">
                     <div class="mb-3 row">
-                        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Price:</label>
+                        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Prc:</label>
                         <div class="col-lg-10 col-md-6 col-sm-12">
                             <input name="price" value="{{ old('price') }}" type="number" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3 row">
+                        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">avail:</label>
+                        <div class="col-lg-10 col-md-6 col-sm-12">
+                            <input name="availability" value="{{ old('availability') }}" type="number" class="form-control">
                         </div>
                     </div>
                 </div>
