@@ -5,16 +5,6 @@
 
     <form method="POST" action="{{ route('interviews.store') }}">
         @csrf
-
-        <div class="form-group">
-            <label for="idUser">Usuario:</label>
-            <select name="idUser" id="idUser" class="form-control">
-                @foreach($viewData['users'] as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                @endforeach
-            </select>
-        </div>
-
         <div class="form-group">
             <label for="dateInterview">Fecha de la Entrevista:</label>
             <input type="date" name="dateInterview" id="dateInterview" class="form-control" required>
