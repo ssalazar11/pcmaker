@@ -55,4 +55,11 @@ class Product extends Model
     public function setAvailability($availability){
         $this->attributes['availability']=$availability;
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_product', 'product_id', 'order_id')
+            ->withPivot('availability', 'price')
+            ->withTimestamps();
+    }
 }
