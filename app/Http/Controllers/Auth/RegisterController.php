@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'telephone' => $data['telephone'],
             'address' => $data['address'],
             'balance'=> 5000,
+
         ]);
     }
 }
