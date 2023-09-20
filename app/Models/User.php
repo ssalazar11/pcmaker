@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'balance',
+        'telephone',
+        'address',
     ];
 
     /**
@@ -104,6 +106,21 @@ class User extends Authenticatable
         $this->attributes['balance'] = $balance;
     }
 
+    public function getTelephone(){
+        return $this->attributes['telephone'];
+    }
+
+    public function setTelephone($telephone){
+        $this->attributes['telephone'] = $telephone;
+    }
+
+    public function getAddress(){
+        return $this->attributes['address'];
+    }
+
+    public function setAddress($address){
+        $this->attributes['address'] = $address;
+    }
     public function getCreatedAt()
 
     {
