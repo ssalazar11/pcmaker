@@ -124,6 +124,12 @@ class User extends Authenticatable
     {
         $this->attributes['updated_at'] = $updatedAt;
     }
+
+    public function interviews()
+    {
+    return $this->hasMany(Interview::class, 'idUser');
+    }
+
 }
 
 
