@@ -35,7 +35,7 @@ Route::post('/deskComputer/save', 'App\Http\Controllers\deskComputerController@s
 Route::get('/deskComputer/{id}', 'App\Http\Controllers\deskComputerController@show')->name("deskComputer.show");
 Route::middleware(['auth'])->group(function () {
     Route::get('/orders/create', 'App\Http\Controllers\OrderController@create')->name('orders.create');
-    Route::post('/orders', 'App\Http\Controllers\OrderController@store')->name('orders.store');
+    Route::post('/orders/store', 'App\Http\Controllers\OrderController@store')->name('orders.store');
     Route::get('/orders/{order}', 'App\Http\Controllers\OrderController@show')->name('orders.show');
     Route::get('/orders', 'App\Http\Controllers\OrderController@index')->name('orders.index');
 

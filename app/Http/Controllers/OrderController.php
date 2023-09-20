@@ -10,7 +10,6 @@ class OrderController extends Controller
 {
     public function index()
 {
-    // Aquí debes obtener la lista de órdenes y pasarla a la vista
     $viewData = [];
         $viewData["title"] = "Your Orders";
         $viewData["subtitle"] =  "List of orders";
@@ -50,17 +49,19 @@ class OrderController extends Controller
         // Asocia un producto a la orden
         $product = Product::findOrFail($request->input('name'));
         $availability = $request->input('availability');
-        $order->products()->attach($product, ['availability' => $availability, 'price' => $product->getPrice(),]);
+        $order->products()->attach($product, ['availability' => $availability, 'price' => $product->getPrice()]);
 
         // Actualiza el total de la orden
         $order->updateTotal();
 
         // Redirecciona a la vista de detalles de la orden
-        return redirect()->route('orders.show', ['order' => $order]);
+        return view('orders.show')->with("order", $order);
     }
 
     public function show(Order $order)
     {
-        return view('orders.show', compact('order'));
+        $viewData=[];
+        $viewData['order'] = $order;
+        return view('orders.show')->with("viewData",$viewData);
     }
 }
