@@ -42,7 +42,7 @@
                         @guest
                         <a class="nav-link active" href="{{ route('login') }}">Login</a>
                         <a class="nav-link active" href="{{ route('register') }}">Register</a>
-                        <a class="nav-link active" href="{{ route('home.index') }}">Home Page</a>
+                        <a class="nav-link active" href="{{ route('home.index') }}">Home</a>
                         
                         @else
                         <form id="logout" action="{{ route('logout') }}" method="POST">
