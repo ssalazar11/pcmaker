@@ -34,10 +34,10 @@ Route::get('/deskComputer/create', 'App\Http\Controllers\deskComputerController@
 Route::post('/deskComputer/save', 'App\Http\Controllers\deskComputerController@save')->name("deskComputer.save");
 Route::get('/deskComputer/{id}', 'App\Http\Controllers\deskComputerController@show')->name("deskComputer.show");
 Route::middleware(['auth'])->group(function () {
-    Route::get('/orders/create', 'App\Http\Controllers\OrderController@create')->name('orders.create');
-    Route::post('/orders/store', 'App\Http\Controllers\OrderController@store')->name('orders.store');
-    Route::get('/orders/{order}', 'App\Http\Controllers\OrderController@show')->name('orders.show');
     Route::get('/orders', 'App\Http\Controllers\OrderController@index')->name('orders.index');
+    Route::get('/orders/create', 'App\Http\Controllers\OrderController@create')->name('orders.create');
+    Route::post('/orders', 'App\Http\Controllers\OrderController@store')->name('orders.store');
+    Route::get('/orders/{order}', 'App\Http\Controllers\OrderController@show')->name('orders.show');
 
     Route::get('/interviews', [InterviewController::class, 'index'])->name('interviews.index');
     Route::get('/interviews/create', [InterviewController::class, 'create'])->name('interviews.create');

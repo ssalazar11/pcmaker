@@ -3,65 +3,68 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\Product;
 
 class OrderController extends Controller
 {
     public function index()
-{
-    $viewData = [];
-        $viewData["title"] = "Your Orders";
-        $viewData["subtitle"] =  "List of orders";
-        $viewData["orders"] = Order::all();
-        return view('orders.index')->with("viewData", $viewData);
+    {
+        // Obtener el usuario autenticado
+        $user = Auth::user();
 
-}
+        // Obtener las órdenes asociadas al usuario autenticado
+        $orders = $user->orders;
 
+        $viewData = [
+            'title' => 'List of Your Orders',
+            'subtitle' => 'Your Orders',
+            'orders' => $orders,
+        ];
+
+        return view('orders.index')->with('viewData', $viewData);
+    }
 
     public function create()
     {
-        $viewData = [];
-        $viewData["title"] = "Create Order";
-        $viewData["products"] = Product::all();
+        // Obtener el usuario autenticado
+        $user = Auth::user();
 
-        return view('orders.create')->with("viewData",$viewData);
+        $viewData = [
+            'title' => 'Create Order',
+            'products' => Product::all(),
+            'user' => $user, // Pasar el usuario autenticado a la vista
+        ];
+
+        return view('orders.create')->with('viewData', $viewData);
     }
 
     public function store(Request $request)
     {
-        // Valida los datos del formulario
+        $user = Auth::user(); // Obtener el usuario autenticado
+
         $request->validate([
-            'user_id' => 'required|exists:users,id',
             'product_id' => 'required|exists:products,id',
             'availability' => 'required|integer|min:1',
         ]);
 
-        // Crea una nueva instancia de Order
         $order = new Order();
-        $order->user_id = $request->input('user_id');
-        $order->status = 'pendiente'; // Puedes establecer un estado predeterminado
-        $order->total = 0; // Puedes establecer el total inicial en 0
-
-        // Guarda la orden en la base de datos
+        $order->user_id = $user->id; // Asociar la orden al usuario autenticado
+        $order->status = 'pending';
+        $order->total = 0;
         $order->save();
 
-        // Asocia un producto a la orden
-        $product = Product::findOrFail($request->input('name'));
+        $product = Product::findOrFail($request->input('product_id'));
         $availability = $request->input('availability');
-        $order->products()->attach($product, ['availability' => $availability, 'price' => $product->getPrice()]);
+        $order->products()->attach($product, [
+            'availability' => $availability,
+            'price' => $product->getPrice(),
+        ]);
 
-        // Actualiza el total de la orden
         $order->updateTotal();
 
-        // Redirecciona a la vista de detalles de la orden
-        return view('orders.show')->with("order", $order);
-    }
-
-    public function show(Order $order)
-    {
-        $viewData=[];
-        $viewData['order'] = $order;
-        return view('orders.show')->with("viewData",$viewData);
+        return redirect()->route('orders.show', ['order' => $order]);
+   
     }
 }
