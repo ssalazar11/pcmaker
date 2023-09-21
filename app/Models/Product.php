@@ -62,5 +62,11 @@ class Product extends Model
             ->withPivot('availability', 'price');
     }
 
+    public function decreaseAvailability($quantity)
+    {
+        $this->availability -= $quantity;
+        $this->save();
+    }
+
 
 }
