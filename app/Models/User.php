@@ -147,6 +147,11 @@ class User extends Authenticatable
     return $this->hasMany(Interview::class, 'idUser');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'idUser');
+    }
+
 }
 
 
