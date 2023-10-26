@@ -13,6 +13,17 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * USER ATTRIBUTES
+     * $this->attributes['id'] - int - contains the user primary key (id)
+     * $this->attributes['name'] - string - contains the user name
+     * $this->attributes['email'] - string - contains the user email
+     * $this->attributes['password'] - string - contains the user password
+     * $this->attributes['address'] - string - contains the user address
+     * $this->attributes['balance'] - int - contains the user balance money
+     * $this->attributes['phoneNumber'] - string - contains the user phone number
+    */
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -21,9 +32,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'balance',
-        'telephone',
         'address',
+        'balance',
+        'phoneNumber',
     ];
 
     /**
@@ -41,88 +52,94 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function getId()
+
+    public function getId(): int
     {
         return $this->attributes['id'];
     }
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->attributes['id'] = $id;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->attributes['name'];
     }
 
-    public function setName($name)
+    public function setName($name): void
     {
         $this->attributes['name'] = $name;
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->attributes['email'];
     }
 
 
-    public function setEmail($email)
+    public function setEmail($email): void
     {
         $this->attributes['email'] = $email;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->attributes['password'];
     }
 
-    public function setPassword($password)
+    public function setPassword($password): void
     {
         $this->attributes['password'] = $password;
     }
 
-    public function getRole()
+    public function getRole(): string
     {
         return $this->attributes['role'];
     }
 
-    public function setRole($role)
+    public function setRole($role): void
     {
         $this->attributes['role'] = $role;
     }
 
-    public function getBalance()
+    public function getBalance(): int
     {
         return $this->attributes['balance'];
     }
 
-    public function setBalance($balance)
+    public function setBalance($balance): void
     {
         $this->attributes['balance'] = $balance;
     }
 
-    public function getTelephone(){
-        return $this->attributes['telephone'];
+    public function getPhoneNumber(): string
+    {
+        return $this->attributes['phoneNumber'];
     }
 
-    public function setTelephone($telephone){
-        $this->attributes['telephone'] = $telephone;
+    public function setPhoneNumber($phoneNumber): void
+    {
+        $this->attributes['phoneNumber'] = $phoneNumber;
     }
 
-    public function getAddress(){
+    public function getAddress(): string
+    {
         return $this->attributes['address'];
     }
 
-    public function setAddress($address){
+    public function setAddress($address): void
+    {
         $this->attributes['address'] = $address;
     }
-    public function getCreatedAt()
 
+    public function getCreatedAt()
     {
         return $this->attributes['created_at'];
     }
@@ -142,16 +159,4 @@ class User extends Authenticatable
         $this->attributes['updated_at'] = $updatedAt;
     }
 
-    public function interviews()
-    {
-    return $this->hasMany(Interview::class, 'idUser');
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'user_id');
-    }
-
 }
-
-

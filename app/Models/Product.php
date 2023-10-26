@@ -8,7 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'price'];
+
+    /**
+     * PRODUCT ATTRIBUTES
+     * $this->attributes['id'] - int - contains the product primary key (id)
+     * $this->attributes['name'] - string - contains the product name
+     * $this->attributes['description'] - string - contains the product description
+     * $this->attributes['image'] - string - contains the product image
+     * $this->attributes['price'] - int - contains the product price
+    */
+
+    protected $fillable = [
+        'name',
+        'description',
+        'image',
+        'price',
+    ];
 
     public function getId(): int
     {
@@ -30,11 +45,13 @@ class Product extends Model
         $this->attributes['name'] = $name;
     }
 
-    public function getDescription(){
+    public function getDescription(): string
+    {
         return $this->attributes['description'];
     }
 
-    public function setDescription($description){
+    public function setDescription($description): void
+    {
         $this->attributes['description']=$description;
     }
 
@@ -48,25 +65,14 @@ class Product extends Model
         $this->attributes['price'] = $price;
     }
 
-    public function getAvailability(){
-        return $this->attributes['availability'];
-    }
-
-    public function setAvailability($availability){
-        $this->attributes['availability']=$availability;
-    }
-
-    public function orders()
+    public function getImage(): string
     {
-        return $this->belongsToMany(Order::class, 'order_product', 'idProduct', 'idOrder')
-            ->withPivot('availability', 'price');
+        return $this->attributes['image'];
     }
 
-    public function decreaseAvailability($quantity)
+    public function setImage($image): void
     {
-        $this->availability -= $quantity;
-        $this->save();
+        $this->attributes['image'] = $image;
     }
-
 
 }

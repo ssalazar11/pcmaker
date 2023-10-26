@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('desk_computers', function (Blueprint $table) {
+        Schema::create('interviews', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('cpu');
-            $table->string('ram');
-            $table->string('HDD');
-            $table->string('graphicCard');
+            $table->string('questions');
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('desk_computers');
+        Schema::dropIfExists('interviews');
     }
 };

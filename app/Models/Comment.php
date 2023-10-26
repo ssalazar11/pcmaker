@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Comment extends Model
 {
     use HasFactory;
 
-    /**
-     * ORDER ATTRIBUTES
-     * $this->attributes['id'] - int - contains the order primary key (id)
-     * $this->attributes['total'] - int - contains the order total price
+     /**
+     * COMMENT ATTRIBUTES
+     * $this->attributes['id'] - int - contains the comment primary key (id)
+     * $this->attributes['text'] - string - contains the comment text
     */
 
+
     protected $fillable = [
-        'total',
+        'text',
     ];
 
     public function getId(): int
@@ -29,13 +30,14 @@ class Order extends Model
         $this->attributes['id'] = $id;
     }
 
-    public function getTotal(): int
+    public function getText(): string
     {
-        return $this->attributes['total'];
+        return $this->attributes['text'];
     }
 
-    public function setTotal($total): void
+    public function setText(): void
     {
-        $this->attributes['total'] = $total;
+        $this->attributes['text'] =  $text;
     }
+
 }

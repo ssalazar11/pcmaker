@@ -9,55 +9,34 @@ class Interview extends Model
 {
     use HasFactory;
 
+     /**
+     * INTERVIEW ATTRIBUTES
+     * $this->attributes['id'] - int - contains the interview primary key (id)
+     * $this->attributes['questions'] - string - contains the interview questions
+    */
+    
     protected $fillable = [
-        'idUser',
-        'dateInterview',
         'questions',
     ];
 
-    public function getId()
+    public function getId(): int
     {
         return $this->attributes['id'];
     }
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->attributes['id'] = $id;
     }
 
-    public function getIdUser()
-    {
-        return $this->attributes['idUser'];
-    }
-
-    public function setIdUser($idUser)
-    {
-        $this->attributes['idUser'] = $idUser;
-    }
-
-    public function getDateInterview()
-    {
-        return $this->attributes['dateInterview'];
-    }
-
-    public function setDateInterview($dateInterview)
-    {
-        $this->attributes['dateInterview'] = $dateInterview;
-    }
-
-    public function getQuestions()
+    public function getQuestions(): string
     {
         return $this->attributes['questions'];
     }
 
-    public function setQuestions($questions)
+    public function setQuestions($questions): void
     {
         $this->attributes['questions'] = $questions;
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'idUser');
     }
 
 }
