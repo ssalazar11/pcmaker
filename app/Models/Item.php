@@ -37,7 +37,7 @@ class Item extends Model
         return $this->attributes['quantity'];
     }
 
-    public function setQuantity(): void
+    public function setQuantity($quantity): void
     {
         $this->attributes['quantity'] = $quantity;
     }
@@ -47,7 +47,7 @@ class Item extends Model
         return $this->attributes['subtotal'];
     }
 
-    public function setSubtotal(): void
+    public function setSubtotal($subtotal): void
     {
         $this->attributes['subtotal'] = $subtotal;
     }

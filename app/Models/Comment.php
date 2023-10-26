@@ -35,7 +35,7 @@ class Comment extends Model
         return $this->attributes['text'];
     }
 
-    public function setText(): void
+    public function setText($text): void
     {
         $this->attributes['text'] =  $text;
     }
