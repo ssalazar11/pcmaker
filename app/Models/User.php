@@ -1,12 +1,17 @@
 <?php
 
 namespace App\Models;
+use App\Models\Comment;
+use App\Models\Interview;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Collection;
 
 class User extends Authenticatable
 {
@@ -21,6 +26,9 @@ class User extends Authenticatable
      * $this->attributes['address'] - string - contains the user address
      * $this->attributes['balance'] - int - contains the user balance money
      * $this->attributes['phoneNumber'] - string - contains the user phone number
+     * $this->comments - Comment[] - contains the associated comments
+     * $this->interviews - Interview[] - contains the associated interviews
+     * $this->orders - Order[] - contains the associated orders
     */
 
     /**
@@ -157,6 +165,51 @@ class User extends Authenticatable
     public function setUpdatedAt($updatedAt)
     {
         $this->attributes['updated_at'] = $updatedAt;
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function setComments(Collection $comments): void
+    {
+        $this->comments = $comments;
+    }
+
+    public function interviews(): HasMany
+    {
+        return $this->hasMany(Interview::class);
+    }
+
+    public function getInterviews(): Collection
+    {
+        return $this->interviews;
+    }
+
+    public function setInterviews(Collection $interviews):void
+    {
+        $this->interviews = $interviews;
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function setOrders(Collection $orders):void
+    {
+        $this->orders = $orders;
     }
 
 }

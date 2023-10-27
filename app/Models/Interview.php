@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Models;
+use App\Models\User;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Interview extends Model
 {
@@ -12,11 +14,14 @@ class Interview extends Model
      /**
      * INTERVIEW ATTRIBUTES
      * $this->attributes['id'] - int - contains the interview primary key (id)
+     * $this->attributes['user_id'] - int - contains the user primary key (id)
      * $this->attributes['questions'] - string - contains the interview questions
+     * $this->user - User - contains the associated User
     */
     
     protected $fillable = [
         'questions',
+        'user_id',
     ];
 
     public function getId(): int
@@ -37,6 +42,31 @@ class Interview extends Model
     public function setQuestions($questions): void
     {
         $this->attributes['questions'] = $questions;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->attributes['user_id'];
+    }
+
+    public function setUserId(int $uId): void
+    {
+        $this->attributes['user_id'] = $uId;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setUser($user): void
+    {
+        $this->user = $user;
     }
 
 }
