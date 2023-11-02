@@ -24,12 +24,16 @@ class Item extends Model
     */
 
 
-    protected $fillable = [
-        'quantity',
-        'subtotal',
-        'order_id',
-        'product_id'
-    ];
+    public static function validate($request)
+    {
+        $request->validate([
+            "subtotal" => "required|numeric|gt:0",
+            "quantity" => "required|numeric|gt:0",
+            "product_id" => "required|exists:products,id",
+            "order_id" => "required|exists:orders,id",
+        ]);
+    }
+
 
     public function getId(): int
     {

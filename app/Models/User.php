@@ -23,6 +23,7 @@ class User extends Authenticatable
      * $this->attributes['name'] - string - contains the user name
      * $this->attributes['email'] - string - contains the user email
      * $this->attributes['password'] - string - contains the user password
+     * $this->attributes['role'] - string - contains the user role
      * $this->attributes['address'] - string - contains the user address
      * $this->attributes['balance'] - int - contains the user balance money
      * $this->attributes['phoneNumber'] - string - contains the user phone number
