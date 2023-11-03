@@ -1,4 +1,4 @@
-<!-- resources/views/interviews/index.blade.php
+resources/views/interviews/index.blade.php
 
 @extends('layouts.app') 
 
@@ -14,4 +14,4 @@
             <hr>
         @endforeach
     </div>
-@endsection -->
+@endsection

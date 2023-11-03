@@ -15,7 +15,7 @@ class ProductController extends Controller
     {
         //
         $viewData = [];
-        $viewData["title"] = "Products - Online Store";
+        $viewData["title"] = "Products - PCMaker";
         $viewData["subtitle"] = "List of products";
         $viewData["products"] = Product::all();
         return view('product.index')->with("viewData", $viewData);
@@ -46,7 +46,7 @@ class ProductController extends Controller
         //
         $viewData = [];
         $product = Product::findOrFail($id);
-        $viewData["title"] = $product->getName()." - Online Store";
+        $viewData["title"] = $product->getName()." - PCMaker";
         $viewData["subtitle"] = $product->getName()." - Product information";
         $viewData["product"] = $product;
         return view('product.show')->with("viewData", $viewData);

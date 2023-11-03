@@ -1,4 +1,4 @@
-<!-- resources/views/interviews/create.blade.php
+resources/views/interviews/create.blade.php
 
 @extends('layouts.app') 
 
@@ -25,7 +25,7 @@
             <button type="submit" class="btn btn-primary">Guardar Entrevista</button>
         </form>
     </div>
-@endsection -->
+@endsection
 
 
 <!-- <!DOCTYPE html>

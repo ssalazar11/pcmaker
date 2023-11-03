@@ -16,7 +16,7 @@ class InterviewController extends Controller
     {
         //
         $viewData = [];
-        $viewData["title"] = "Interviews";
+        $viewData["title"] = "Interviews - PCMaker";
         $user = Auth::user();
         $viewData["interviews"] = $user->interviews;
         return view('interviews.index')->with("viewData", $viewData);

@@ -9,7 +9,7 @@ class AdminCommentController extends Controller
 {
     public function index(){
         $viewData = [];
-        $viewData["title"] = "Admin Page - Products - Online Store";
+        $viewData["title"] = "Admin Page - Products - PCMaker";
         $viewData["products"] = Comment::all();
         return view('admin.product.index')->with("viewData", $viewData);
     }
