@@ -28,6 +28,7 @@ class InterviewController extends Controller
     public function create()
     {
         //
+        return view('interviews.create');
     }
 
     /**
@@ -49,7 +50,7 @@ class InterviewController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
@@ -58,6 +59,8 @@ class InterviewController extends Controller
     public function edit(string $id)
     {
         //
+        $interview = Interview::find($id);
+        return view('interviews.edit', compact('interview'));
     }
 
     /**
@@ -79,14 +82,14 @@ class InterviewController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
         //
         $user = Auth::user();
         $interview = Interview::find($id);
         if($interview && $interview->getUserId() == $user->getId()){
-            $interview->delete();
-            return redirect()->route('interview.index');
+            $interview->destroy($id);
+            return back();
         }
         return back()->withErrors('Interview not found');
     }

@@ -35,11 +35,14 @@ Route::post('/cart/add/{id}', 'App\Http\Controllers\CartController@add')->name("
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/cart/purchase', 'App\Http\Controllers\CartController@purchase')->name("cart.purchase"); 
-    Route::get('/my-account/orders', 'App\Http\Controllers\MyAccountController@orders')->name("myaccount.orders"); 
-    // Route::get('/interviews', [InterviewController::class, 'index'])->name('interviews.index');
-    // Route::get('/interviews/create', [InterviewController::class, 'create'])->name('interviews.create');
-    // Route::post('/interviews', [InterviewController::class, 'store'])->name('interviews.store');
-    
+    Route::get('/my-account/orders', 'App\Http\Controllers\MyAccountController@orders')->name("myaccount.orders");
+
+    Route::get('/interviews', 'App\Http\Controllers\InterviewController@index')->name('interview.index');
+    Route::get('/interviews/create', 'App\Http\Controllers\InterviewController@create')->name('interview.create');
+    Route::post('/interviews', 'App\Http\Controllers\InterviewController@store')->name('interview.store');
+    Route::get('/interviews/{id}/edit', 'App\Http\Controllers\InterviewController@edit')->name('interview.edit');
+    Route::match(['put', 'patch'], '/interviews/{id}', 'App\Http\Controllers\InterviewController@update')->name('interview.update');
+    Route::delete('/interviews/{id}', 'App\Http\Controllers\InterviewController@delete')->name('interview.delete');
 });
 
 

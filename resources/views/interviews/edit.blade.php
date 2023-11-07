@@ -1,6 +1,7 @@
 @extends('layouts.app')
+
 @section('content')
-<header class="masthead" style="background-image: url('{{ asset("/img/pc-gamer.webp") }}');">
+<header class="masthead" style="background-image: url('{{ asset('/img/pc-gamer.webp') }}');">
     <div class="container">
         <div class="intro-text" style="padding-top: 119px; padding-bottom: 31px;">
             <section class="position-relative py-4 py-xl-5">
@@ -11,26 +12,32 @@
                                 <div class="container">
                                     <div class="row mb-5">
                                         <div class="col-md-8 col-xl-6 text-center mx-auto">
-                                            <h2><span style="color: rgb(229, 188, 49);">Forgot your Password?</span></h2>
+                                            <h2 style="color: rgb(229, 188, 49);">Edit Interview</h2>
                                         </div>
                                     </div>
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-md-6 col-xl-4">
-                                            <div class="card mb-5">
-                                                <div class="card-body d-flex flex-column align-items-center">
-                                                    <form class="text-center" method="post" action="{{ route('password.email') }}">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <form method="post" action="{{ route('interview.update', ['id' => $interview->id]) }}">
                                                         @csrf
+                                                        @method('PATCH')
+
                                                         <div class="mb-3">
-                                                            <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
-                                                            @error('email')
+                                                            <label for="questions" class="form-label">Questions</label>
+                                                            <textarea id="questions" class="form-control @error('questions') is-invalid @enderror" name="questions" required>{{ $interview->getQuestions() }}</textarea>
+
+                                                            @error('questions')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                             @enderror
                                                         </div>
-                                                        <div class="mb-3"></div>
-                                                        <div class="mb-3">
-                                                            <button class="btn btn-primary d-block w-100" type="submit" style="background-color: rgb(229, 188, 49); border-color: rgb(229, 188, 49);">Send Password Reset Link</button>
+
+                                                        <div class="row mb-0">
+                                                            <div class="col-md-6 offset-md-4">
+                                                                <button type="submit" class="btn btn-primary">Update Interview</button>
+                                                            </div>
                                                         </div>
                                                     </form>
                                                 </div>

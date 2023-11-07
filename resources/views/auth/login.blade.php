@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<header class="masthead" style="background-image: url('{{ asset("/img/pc-gamer.webp") }}');">
 <div class="container">
     <div class="intro-text" style="padding-top: 119px; padding-bottom: 31px;">
         <section class="position-relative py-4 py-xl-5">
@@ -58,6 +59,7 @@
         </section>
     </div>
 </div>
+</header>
 
 
 @endsection

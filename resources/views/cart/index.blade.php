@@ -3,6 +3,7 @@
 @section('subtitle', $viewData["subtitle"])
 @section('content')
 <div class="card">
+<header class="masthead" style="background-image: url('{{ asset("/img/pc-gamer.webp") }}');">
     <div class="card-header">
         Products in Cart
         </div>
@@ -41,6 +42,7 @@
             </div>
         </div>
     </div>
+</header>
 </div>
 @endsection
 
