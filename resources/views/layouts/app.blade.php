@@ -34,15 +34,15 @@
                     @guest
                     <a class="nav-link active" href="{{ route('login') }}">Login</a>
                     <a class="nav-link active" href="{{ route('register') }}">Register</a>
-                    <a class="nav-link active" href="#about">About</a>
                     <a class="nav-link active" href="{{ route('product.index') }}">Products</a> 
                     <a class="nav-link active" href="{{ route('cart.index') }}">Cart</a>
                     <a class="nav-link active" href="{{ route('home.index') }}">Home</a>
 
                     @else
+                    
+                        <a class="nav-link active" href="{{ route('home.index') }}">Home</a>
                         <a class="nav-link active" href="{{ route('product.index') }}">Products</a> 
                         <a class="nav-link active" href="{{ route('cart.index') }}">Cart</a>
-                        <a class="nav-link active" href="{{ route('home.index') }}">Home</a>
                         <a class="nav-link active" href="{{ route('myaccount.orders') }}">My Orders</a> 
                         <a class="nav-link active" href="{{ route('interview.index') }}">My Interviews</a> 
                         <form id="logout" action="{{ route('logout') }}" method="POST">
