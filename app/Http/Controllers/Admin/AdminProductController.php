@@ -20,12 +20,7 @@ class AdminProductController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
-            'price' => 'required|numeric|gt:0',
-            'image' => 'image',
-        ]);
+        Product::validate($request); 
 
         $newProduct = new Product();
         $newProduct->setName($request->input('name'));
@@ -60,13 +55,7 @@ class AdminProductController extends Controller
     {
         $product = Product::findOrfail($id);  // Si el producto no existe, Laravel arrojará automáticamente una excepción.
 
-        // Validar los datos recibidos del formulario
-        $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
-            'price' => 'required|numeric|gt:0',
-            'image' => 'image',
-        ]);
+        Product::validate($request); 
 
         // Actualizar los atributos del producto
         $product->setName($request->input('name'));

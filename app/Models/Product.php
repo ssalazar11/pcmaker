@@ -18,6 +18,8 @@ class Product extends Model
      * $this->attributes['description'] - string - contains the product description
      * $this->attributes['image'] - string - contains the product image
      * $this->attributes['price'] - int - contains the product price
+     * $this->attributes['created_at'] - timestamp - contains the product creation date
+     * $this->attributes['updated_at'] - timestamp - contains the product update date 
      * $this->comments - Comment[] - contains the associated comments
      * $this->items - Item[] - contains the associated items
      */
@@ -27,6 +29,16 @@ class Product extends Model
         'image',
         'price',
     ];
+
+    public static function validate($request)
+    {
+    $request->validate([
+            "name" => "required|max:255",
+            "description" => "required",
+            "price" => "required|numeric|gt:0",
+            'image' => 'image',
+        ]);
+    } 
 
     public static function sumPricesByQuantities($products, $productsInSession)
     {
@@ -43,7 +55,7 @@ class Product extends Model
         return $this->attributes['id'];
     }
 
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->attributes['id'] = $id;
     }
@@ -53,7 +65,7 @@ class Product extends Model
         return $this->attributes['name'];
     }
 
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->attributes['name'] = $name;
     }
@@ -63,7 +75,7 @@ class Product extends Model
         return $this->attributes['description'];
     }
 
-    public function setDescription($description): void
+    public function setDescription(string $description): void
     {
         $this->attributes['description'] = $description;
     }
@@ -73,7 +85,7 @@ class Product extends Model
         return $this->attributes['price'];
     }
 
-    public function setPrice($price): void
+    public function setPrice(int $price): void
     {
         $this->attributes['price'] = $price;
     }
@@ -83,9 +95,29 @@ class Product extends Model
         return $this->attributes['image'];
     }
 
-    public function setImage($image): void
+    public function setImage(string $image): void
     {
         $this->attributes['image'] = $image;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->attributes['created_at'];
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->attributes['created_at'] = $createdAt;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->attributes['updated_at'];
+    }
+
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->attributes['updated_at'] = $updatedAt;
     }
 
     public function comments(): HasMany

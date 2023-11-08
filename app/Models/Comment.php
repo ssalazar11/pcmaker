@@ -16,6 +16,8 @@ class Comment extends Model
      * $this->attributes['product_id'] - int - contains the product primary key (id)
      * $this->attributes['user_id'] - int - contains the user primary key (id)
      * $this->attributes['text'] - string - contains the comment text
+     * $this->attributes['created_at'] - timestamp - contains the comment creation date
+     * $this->attributes['updated_at'] - timestamp - contains the comment update date 
      * $this->product - Product - contains the associated Product
      * $this->user - User - contains the associated User
      */
@@ -30,7 +32,7 @@ class Comment extends Model
         return $this->attributes['id'];
     }
 
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->attributes['id'] = $id;
     }
@@ -40,9 +42,29 @@ class Comment extends Model
         return $this->attributes['text'];
     }
 
-    public function setText($text): void
+    public function setText(string $text): void
     {
         $this->attributes['text'] = $text;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->attributes['created_at'];
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->attributes['created_at'] = $createdAt;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->attributes['updated_at'];
+    }
+
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->attributes['updated_at'] = $updatedAt;
     }
 
     public function getProductId(): int
@@ -65,7 +87,7 @@ class Comment extends Model
         return $this->product;
     }
 
-    public function setProduct($product): void
+    public function setProduct(Product $product): void
     {
         $this->product = $product;
     }
@@ -90,7 +112,7 @@ class Comment extends Model
         return $this->user;
     }
 
-    public function setUser($user): void
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }

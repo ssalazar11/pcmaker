@@ -16,6 +16,8 @@ class Order extends Model
      * $this->attributes['id'] - int - contains the order primary key (id)
      * $this->attributes['user_id'] - int - contains the user primary key (id)
      * $this->attributes['total'] - int - contains the order total price
+     * $this->attributes['created_at'] - timestamp - contains the order creation date
+     * $this->attributes['updated_at'] - timestamp - contains the order update date 
      * $this->user - User - contains the associated User
      * $this->items - Item[] - contains the associated items
      */
@@ -32,7 +34,7 @@ class Order extends Model
         return $this->attributes['id'];
     }
 
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->attributes['id'] = $id;
     }
@@ -42,7 +44,7 @@ class Order extends Model
         return $this->attributes['total'];
     }
 
-    public function setTotal($total): void
+    public function setTotal(int $total): void
     {
         $this->attributes['total'] = $total;
     }
@@ -87,7 +89,7 @@ class Order extends Model
         return $this->user;
     }
 
-    public function setUser($user): void
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }

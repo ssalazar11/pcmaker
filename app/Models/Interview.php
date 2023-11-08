@@ -14,6 +14,8 @@ class Interview extends Model
      * $this->attributes['id'] - int - contains the interview primary key (id)
      * $this->attributes['user_id'] - int - contains the user primary key (id)
      * $this->attributes['questions'] - string - contains the interview questions
+     * $this->attributes['created_at'] - timestamp - contains the interview creation date
+     * $this->attributes['updated_at'] - timestamp - contains the interview update date 
      * $this->user - User - contains the associated User
      */
     protected $fillable = [
@@ -26,7 +28,7 @@ class Interview extends Model
         return $this->attributes['id'];
     }
 
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->attributes['id'] = $id;
     }
@@ -36,9 +38,29 @@ class Interview extends Model
         return $this->attributes['questions'];
     }
 
-    public function setQuestions($questions): void
+    public function setQuestions(string $questions): void
     {
         $this->attributes['questions'] = $questions;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->attributes['created_at'];
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->attributes['created_at'] = $createdAt;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->attributes['updated_at'];
+    }
+
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->attributes['updated_at'] = $updatedAt;
     }
 
     public function getUserId(): int
@@ -61,7 +83,7 @@ class Interview extends Model
         return $this->user;
     }
 
-    public function setUser($user): void
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }
