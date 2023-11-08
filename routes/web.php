@@ -29,7 +29,6 @@ Route::delete('/admin/products/delete/{id}', 'App\Http\Controllers\Admin\AdminPr
 
 Route::get('/products', 'App\Http\Controllers\ProductController@index')->name("product.index");
 Route::get('/products/{id}', 'App\Http\Controllers\ProductController@show')->name("product.show");
-Route::get('/products/search', 'App\Http\Controllers\ProductController@searchProducts')->name('product.search.ajax');
 Route::get('/cart', 'App\Http\Controllers\CartController@index')->name("cart.index");
 Route::get('/cart/delete', 'App\Http\Controllers\CartController@delete')->name("cart.delete");
 Route::post('/cart/add/{id}', 'App\Http\Controllers\CartController@add')->name("cart.add"); 
@@ -37,6 +36,8 @@ Route::post('/cart/add/{id}', 'App\Http\Controllers\CartController@add')->name("
 Route::middleware(['auth'])->group(function () {
     Route::get('/cart/purchase', 'App\Http\Controllers\CartController@purchase')->name("cart.purchase"); 
     Route::get('/my-account/orders', 'App\Http\Controllers\MyAccountController@orders')->name("myaccount.orders");
+    Route::get('/my-account/orders/{order}', 'App\Http\Controllers\MyAccountController@showOrderDetails')->name('orders.show');
+    Route::get('/my-account/orders/{order}/download-invoice', 'App\Http\Controllers\MyAccountController@downloadInvoice')->name('orders.downloadInvoice');
 
     Route::get('/interviews', 'App\Http\Controllers\InterviewController@index')->name('interview.index');
     Route::get('/interviews/create', 'App\Http\Controllers\InterviewController@create')->name('interview.create');

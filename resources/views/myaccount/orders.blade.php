@@ -46,12 +46,16 @@
                                                                                 <td>${{ $item->getSubtotal() }}</td>
                                                                                 <td>{{ $item->getQuantity() }}</td>
                                                                                 <td>${{ $order->getTotal() }}</td>
-                                                                                <td>{{ $order->getCreatedAt() }}</td>
+                                                                                <td>{{ $order->getCreatedAt()}}</td>
                                                                             </tr>
                                                                         @endforeach
                                                                     </tbody>
                                                                 </table>
                                                             </div>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                            <a href="{{ route('orders.show', $order->getId()) }}" class="btn btn-info">View Details</a>
+                                                            <a href="{{ route('orders.downloadInvoice', $order->getId()) }}" class="btn btn-success">Download Invoice</a>
                                                         </div>
                                                     </div>
                                                 @empty
