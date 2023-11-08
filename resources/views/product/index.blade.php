@@ -15,6 +15,7 @@
                                     <div class="container">
                                         <!-- Products section -->
                                         <div class="row">
+                                        <a href="{{ request()->fullUrlWithQuery(['orderByPrice' => 'asc']) }}" class="btn btn-primary" >Ordenar por precio</a>
                                             @foreach ($viewData["products"] as $product)
                                                 <div class="col-md-4 col-lg-3 mb-4">
                                                     <div class="card">

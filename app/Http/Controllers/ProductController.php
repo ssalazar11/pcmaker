@@ -6,18 +6,23 @@ use App\Models\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $viewData = [];
         $viewData["title"] = "Products - PCMaker";
         $viewData["subtitle"] = "List of products";
-        $viewData["products"] = Product::all();
+        if($request->has('orderByPrice')&& $request->get('orderByPrice')=='asc'){
+            $viewData["products"]=Product::orderBy('price', 'asc')->get();
+        }else{
+            $viewData["products"] = Product::all();
+        }
         return view('product.index')->with("viewData", $viewData);
 
     }
