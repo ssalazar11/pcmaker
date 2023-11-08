@@ -1,12 +1,9 @@
-{{-- resources/views/myaccount/invoice.blade.php --}}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice #{{ $order->getId() }}</title>
-    <!-- Aquí puedes incluir estilos adicionales si es necesario -->
 </head>
 <body>
     <div class="container mt-4">

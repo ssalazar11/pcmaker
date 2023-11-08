@@ -50,10 +50,8 @@ class CartController extends Controller
             $userId = Auth::user()->getId();
             $user = Auth::user();
             
-            // Verificar si el balance es suficiente
             $total = $this->calculateTotal($productsInSession);
             if ($user->getBalance() < $total) {
-                // Puedes personalizar el mensaje de error según tus necesidades
                 return redirect()->route('cart.index')->with('error', 'Insufficient balance to make the purchase.');
             }
 
