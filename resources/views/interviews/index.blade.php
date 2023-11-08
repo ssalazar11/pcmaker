@@ -21,7 +21,7 @@
                                                 @foreach($viewData["interviews"] as $interview)
                                                 <div class="list-group-item mb-4">
                                                     <div class="card-body d-flex flex-column align-items-center">
-                                                        <p>Interview Questions: {{ $interview->questions }}</p>
+                                                        <p>Interview Questions: {{ $interview->getQuestions() }}</p>
                                                         <form action="{{ route('interview.delete', ['id' => $interview->id]) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
