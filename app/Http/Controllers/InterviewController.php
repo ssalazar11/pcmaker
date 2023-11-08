@@ -8,12 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class InterviewController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
         $viewData = [];
         $viewData['title'] = 'Interviews - PCMaker';
         $user = Auth::user();
@@ -22,21 +18,13 @@ class InterviewController extends Controller
         return view('interviews.index')->with('viewData', $viewData);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
         return view('interviews.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
         $user = Auth::user();
         $newInterview = new Interview();
         $newInterview->setUserId($user->getId());
@@ -46,31 +34,15 @@ class InterviewController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
         $interview = Interview::find($id);
 
         return view('interviews.edit', compact('interview'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
         $user = Auth::User();
         $interview = Interview::find($id);
         if ($interview && $interview->getUserId() == $user->getId()) {
@@ -83,12 +55,8 @@ class InterviewController extends Controller
         return back()->withErrors('Interview not found');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function delete(string $id)
+    public function delete($id)
     {
-        //
         $user = Auth::user();
         $interview = Interview::find($id);
         if ($interview && $interview->getUserId() == $user->getId()) {
