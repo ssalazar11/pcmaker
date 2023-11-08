@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product; 
-use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
-
 
 class ProductController extends Controller
 {
@@ -16,14 +14,15 @@ class ProductController extends Controller
     {
         //
         $viewData = [];
-        $viewData["title"] = "Products - PCMaker";
-        $viewData["subtitle"] = "List of products";
-        if($request->has('orderByPrice')&& $request->get('orderByPrice')=='asc'){
-            $viewData["products"]=Product::orderBy('price', 'asc')->get();
-        }else{
-            $viewData["products"] = Product::all();
+        $viewData['title'] = 'Products - PCMaker';
+        $viewData['subtitle'] = 'List of products';
+        if ($request->has('orderByPrice') && $request->get('orderByPrice') == 'asc') {
+            $viewData['products'] = Product::orderBy('price', 'asc')->get();
+        } else {
+            $viewData['products'] = Product::all();
         }
-        return view('product.index')->with("viewData", $viewData);
+
+        return view('product.index')->with('viewData', $viewData);
 
     }
 
@@ -51,10 +50,11 @@ class ProductController extends Controller
         //
         $viewData = [];
         $product = Product::findOrFail($id);
-        $viewData["title"] = $product->getName()." - PCMaker";
-        $viewData["subtitle"] = $product->getName()." - Product information";
-        $viewData["product"] = $product;
-        return view('product.show')->with("viewData", $viewData);
+        $viewData['title'] = $product->getName().' - PCMaker';
+        $viewData['subtitle'] = $product->getName().' - Product information';
+        $viewData['product'] = $product;
+
+        return view('product.show')->with('viewData', $viewData);
 
     }
 

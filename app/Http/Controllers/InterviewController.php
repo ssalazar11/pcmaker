@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Interview;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,10 +15,11 @@ class InterviewController extends Controller
     {
         //
         $viewData = [];
-        $viewData["title"] = "Interviews - PCMaker";
+        $viewData['title'] = 'Interviews - PCMaker';
         $user = Auth::user();
-        $viewData["interviews"] = $user->interviews;
-        return view('interviews.index')->with("viewData", $viewData);
+        $viewData['interviews'] = $user->interviews;
+
+        return view('interviews.index')->with('viewData', $viewData);
     }
 
     /**
@@ -42,6 +42,7 @@ class InterviewController extends Controller
         $newInterview->setUserId($user->getId());
         $newInterview->setQuestions($request->input('questions'));
         $newInterview->save();
+
         return back();
     }
 
@@ -60,6 +61,7 @@ class InterviewController extends Controller
     {
         //
         $interview = Interview::find($id);
+
         return view('interviews.edit', compact('interview'));
     }
 
@@ -71,11 +73,13 @@ class InterviewController extends Controller
         //
         $user = Auth::User();
         $interview = Interview::find($id);
-        if($interview && $interview->getUserId() == $user->getId()){
+        if ($interview && $interview->getUserId() == $user->getId()) {
             $interview->setQuestions($request->input('questions'));
             $interview->save();
+
             return redirect()->route('interview.index');
         }
+
         return back()->withErrors('Interview not found');
     }
 
@@ -87,10 +91,12 @@ class InterviewController extends Controller
         //
         $user = Auth::user();
         $interview = Interview::find($id);
-        if($interview && $interview->getUserId() == $user->getId()){
+        if ($interview && $interview->getUserId() == $user->getId()) {
             $interview->destroy($id);
+
             return back();
         }
+
         return back()->withErrors('Interview not found');
     }
 }

@@ -1,17 +1,14 @@
 <?php
 
 namespace App\Models;
-use App\Models\Comment;
-use App\Models\Interview;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Collection;
 
 class User extends Authenticatable
 {
@@ -30,7 +27,7 @@ class User extends Authenticatable
      * $this->comments - Comment[] - contains the associated comments
      * $this->interviews - Interview[] - contains the associated interviews
      * $this->orders - Order[] - contains the associated orders
-    */
+     */
 
     /**
      * The attributes that are mass assignable.
@@ -61,7 +58,6 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
@@ -91,7 +87,6 @@ class User extends Authenticatable
     {
         return $this->attributes['email'];
     }
-
 
     public function setEmail($email): void
     {
@@ -193,7 +188,7 @@ class User extends Authenticatable
         return $this->interviews;
     }
 
-    public function setInterviews(Collection $interviews):void
+    public function setInterviews(Collection $interviews): void
     {
         $this->interviews = $interviews;
     }
@@ -208,9 +203,8 @@ class User extends Authenticatable
         return $this->orders;
     }
 
-    public function setOrders(Collection $orders):void
+    public function setOrders(Collection $orders): void
     {
         $this->orders = $orders;
     }
-
 }

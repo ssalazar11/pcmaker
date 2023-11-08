@@ -1,24 +1,21 @@
 <?php
 
 namespace App\Models;
-use App\Models\User;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Interview extends Model
 {
     use HasFactory;
 
-     /**
+    /**
      * INTERVIEW ATTRIBUTES
      * $this->attributes['id'] - int - contains the interview primary key (id)
      * $this->attributes['user_id'] - int - contains the user primary key (id)
      * $this->attributes['questions'] - string - contains the interview questions
      * $this->user - User - contains the associated User
-    */
-    
+     */
     protected $fillable = [
         'questions',
         'user_id',
@@ -68,5 +65,4 @@ class Interview extends Model
     {
         $this->user = $user;
     }
-
 }

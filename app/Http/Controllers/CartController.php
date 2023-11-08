@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Item;
 use App\Models\Order;
-use App\Models\Item; 
+use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -14,42 +14,45 @@ class CartController extends Controller
     {
         $total = 0;
         $productsInCart = [];
-        $productsInSession = $request->session()->get("products");
+        $productsInSession = $request->session()->get('products');
         if ($productsInSession) {
             $productsInCart = Product::findMany(array_keys($productsInSession));
             $total = Product::sumPricesByQuantities($productsInCart, $productsInSession);
         }
 
         $viewData = [];
-        $viewData["title"] = "Cart - PCMaker";
-        $viewData["subtitle"] = "Shopping Cart";
-        $viewData["total"] = $total;
-        $viewData["products"] = $productsInCart;
-        return view('cart.index')->with("viewData", $viewData);
+        $viewData['title'] = 'Cart - PCMaker';
+        $viewData['subtitle'] = 'Shopping Cart';
+        $viewData['total'] = $total;
+        $viewData['products'] = $productsInCart;
+
+        return view('cart.index')->with('viewData', $viewData);
     }
-    
+
     public function add(Request $request, $id)
     {
-        $products = $request->session()->get("products");
+        $products = $request->session()->get('products');
         $products[$id] = $request->input('quantity');
         $request->session()->put('products', $products);
+
         return redirect()->route('cart.index');
     }
 
     public function delete(Request $request)
     {
         $request->session()->forget('products');
+
         return back();
     }
 
     public function purchase(Request $request)
     {
-        $productsInSession = $request->session()->get("products");
+        $productsInSession = $request->session()->get('products');
 
         if ($productsInSession) {
             $userId = Auth::user()->getId();
             $user = Auth::user();
-            
+
             // Verificar si el balance es suficiente
             $total = $this->calculateTotal($productsInSession);
             if ($user->getBalance() < $total) {
@@ -78,16 +81,17 @@ class CartController extends Controller
             $order->setTotal($total);
             $order->save();
             $newBalance = $user->getBalance() - $total;
-            $user->setBalance($newBalance); 
+            $user->setBalance($newBalance);
             $user->save();
 
             $request->session()->forget('products');
 
             $viewData = [];
-            $viewData["title"] = "Purchase - PCMaker";
-            $viewData["subtitle"] = "Purchase Status";
-            $viewData["order"] = $order;
-            return view('cart.purchase')->with("viewData", $viewData);
+            $viewData['title'] = 'Purchase - PCMaker';
+            $viewData['subtitle'] = 'Purchase Status';
+            $viewData['order'] = $order;
+
+            return view('cart.purchase')->with('viewData', $viewData);
         } else {
             return redirect()->route('cart.index');
         }
@@ -101,8 +105,7 @@ class CartController extends Controller
             $quantity = $productsInSession[$product->getId()];
             $total += $product->getPrice() * $quantity;
         }
+
         return $total;
     }
-
 }
-   

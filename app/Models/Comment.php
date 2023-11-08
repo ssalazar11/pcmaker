@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Models;
-use App\Models\Product;
-use App\Models\User;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +10,7 @@ class Comment extends Model
 {
     use HasFactory;
 
-     /**
+    /**
      * COMMENT ATTRIBUTES
      * $this->attributes['id'] - int - contains the comment primary key (id)
      * $this->attributes['product_id'] - int - contains the product primary key (id)
@@ -20,9 +18,7 @@ class Comment extends Model
      * $this->attributes['text'] - string - contains the comment text
      * $this->product - Product - contains the associated Product
      * $this->user - User - contains the associated User
-    */
-
-
+     */
     protected $fillable = [
         'text',
         'product_id',
@@ -46,7 +42,7 @@ class Comment extends Model
 
     public function setText($text): void
     {
-        $this->attributes['text'] =  $text;
+        $this->attributes['text'] = $text;
     }
 
     public function getProductId(): int
@@ -98,5 +94,4 @@ class Comment extends Model
     {
         $this->user = $user;
     }
-
 }

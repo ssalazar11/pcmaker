@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Models;
-use App\Models\Order;
-use App\Models\Product;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +10,7 @@ class Item extends Model
 {
     use HasFactory;
 
-     /**
+    /**
      * ITEM ATTRIBUTES
      * $this->attributes['id'] - int - contains the item primary key (id)
      * $this->attributes['order_id'] - int - contains the item primary key (id)
@@ -21,19 +19,16 @@ class Item extends Model
      * $this->attributes['subtotal'] - int - contains the product subtotal price
      * $this->order - Order - contains the associated Order
      * $this->product - Product - contains the associated Products
-    */
-
-
+     */
     public static function validate($request)
     {
         $request->validate([
-            "subtotal" => "required|numeric|gt:0",
-            "quantity" => "required|numeric|gt:0",
-            "product_id" => "required|exists:products,id",
-            "order_id" => "required|exists:orders,id",
+            'subtotal' => 'required|numeric|gt:0',
+            'quantity' => 'required|numeric|gt:0',
+            'product_id' => 'required|exists:products,id',
+            'order_id' => 'required|exists:orders,id',
         ]);
     }
-
 
     public function getId(): int
     {
@@ -88,7 +83,7 @@ class Item extends Model
     public function setOrder($order): void
     {
         $this->order = $order;
-    }    
+    }
 
     public function getProductId(): int
     {
@@ -114,5 +109,4 @@ class Item extends Model
     {
         $this->product = $product;
     }
-
 }

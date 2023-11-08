@@ -1,13 +1,11 @@
 <?php
 
 namespace App\Models;
-use App\Models\Comment;
-use App\Models\Item;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Collection;
 
 class Product extends Model
 {
@@ -22,8 +20,7 @@ class Product extends Model
      * $this->attributes['price'] - int - contains the product price
      * $this->comments - Comment[] - contains the associated comments
      * $this->items - Item[] - contains the associated items
-    */
-
+     */
     protected $fillable = [
         'name',
         'description',
@@ -35,11 +32,11 @@ class Product extends Model
     {
         $total = 0;
         foreach ($products as $product) {
-        $total = $total + ($product->getPrice()*$productsInSession[$product->getId()]);
-    }
+            $total = $total + ($product->getPrice() * $productsInSession[$product->getId()]);
+        }
 
         return $total;
-    } 
+    }
 
     public function getId(): int
     {
@@ -68,7 +65,7 @@ class Product extends Model
 
     public function setDescription($description): void
     {
-        $this->attributes['description']=$description;
+        $this->attributes['description'] = $description;
     }
 
     public function getPrice(): int
@@ -120,5 +117,4 @@ class Product extends Model
     {
         $this->items = $items;
     }
-
 }

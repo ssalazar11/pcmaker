@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Models;
-use App\Models\User;
-use App\Models\Item;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Collection;
 
 class Order extends Model
 {
@@ -21,13 +18,12 @@ class Order extends Model
      * $this->attributes['total'] - int - contains the order total price
      * $this->user - User - contains the associated User
      * $this->items - Item[] - contains the associated items
-    */
-
+     */
     public static function validate($request)
     {
         $request->validate([
-            "total" => "required|numeric",
-            "user_id" => "required|exists:users,id",
+            'total' => 'required|numeric',
+            'user_id' => 'required|exists:users,id',
         ]);
     }
 
@@ -110,5 +106,4 @@ class Order extends Model
     {
         $this->items = $items;
     }
-
 }
