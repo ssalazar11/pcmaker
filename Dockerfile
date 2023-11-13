@@ -1,51 +1,47 @@
-# Fase 1: Construcción de Frontend con Node
-FROM node:latest as frontend
+FROM php:8.1.4-apache
 
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install
-COPY . .
-RUN npm run dev
+# Instalar dependencias
+RUN apt-get update -y && apt-get install -y openssl zip unzip git 
 
-# Fase 2: Construcción de Backend con PHP
-FROM php:8.0-fpm as backend
-
-# Directorio de trabajo
-WORKDIR /var/www
-
-# Instalar dependencias del sistema y extensiones de PHP
-RUN apt-get update && apt-get install -y \
-    libonig-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libzip-dev \
-    zip \
-    unzip \
-    curl \
-    git \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+# Instalar extensiones de PHP
+RUN docker-php-ext-install pdo_mysql
 
 # Instalar Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copiar los archivos de frontend construidos desde la fase de build
-COPY --from=frontend /app/public /var/www/public
+# Copiar archivos de la aplicación
+COPY . /var/www/html
+COPY ./public/.htaccess /var/www/html/.htaccess
 
-# Copiar el código fuente de Laravel
-COPY . .
+# Establecer directorio de trabajo
+WORKDIR /var/www/html
 
-# Copiar el archivo .env y otras configuraciones necesarias
-# Asegúrate de tener un .env adecuado para la producción o configura el entorno aquí
-# COPY .env.production .env
+# Instalar dependencias de Composer
+RUN composer install \
+    --ignore-platform-reqs \
+    --no-interaction \
+    --no-plugins \
+    --no-scripts \
+    --prefer-dist
 
-# Instalar dependencias de Laravel
-RUN composer install --optimize-autoloader --no-dev
+# Configurar Laravel
+RUN php artisan key:generate
+RUN php artisan migrate
+RUN chmod -R 777 storage
 
-# Otorgar permisos para la carpeta storage y bootstrap/cache
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+# Habilitar mod_rewrite para Apache
+RUN a2enmod rewrite
+RUN service apache2 restart
 
-# Exponer el puerto 9000 y arrancar php-fpm server
-EXPOSE 9000
-CMD ["php-fpm"]
+# Instalar Node.js y npm
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - # Asegúrate de usar la versión correcta de Node.js
+RUN apt-get install -y nodejs
+
+# Instalar dependencias de Node
+RUN npm install
+
+# Exponer el puerto (opcional, dependiendo de tu configuración)
+EXPOSE 3000
+
+# Comando para ejecutar npm run dev
+CMD ["npm", "run", "dev"]
