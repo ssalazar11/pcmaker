@@ -23,10 +23,10 @@ class ProductController extends Controller
 
     }
 
-    public function show(string $id)
+    public function show(int $id)
     {
         $viewData = [];
-        $product = Product::findOrFail($id);
+        $product = Product::with('comments')->findOrFail($id);
         $viewData['title'] = $product->getName().' - PCMaker';
         $viewData['subtitle'] = $product->getName().' - Product information';
         $viewData['product'] = $product;

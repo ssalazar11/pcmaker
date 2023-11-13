@@ -34,14 +34,14 @@ class InterviewController extends Controller
         return back();
     }
 
-    public function edit(string $id)
+    public function edit(int $id)
     {
         $interview = Interview::find($id);
 
         return view('interviews.edit', compact('interview'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
         $user = Auth::User();
         $interview = Interview::find($id);
@@ -55,16 +55,10 @@ class InterviewController extends Controller
         return back()->withErrors('Interview not found');
     }
 
-    public function delete($id)
+    public function delete(int $id)
     {
         $user = Auth::user();
-        $interview = Interview::find($id);
-        if ($interview && $interview->getUserId() == $user->getId()) {
-            $interview->destroy($id);
-
-            return back();
-        }
-
-        return back()->withErrors('Interview not found');
+        Interview::destroy($id);
+        return back();
     }
 }

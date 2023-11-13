@@ -31,7 +31,7 @@ class AdminCommentController extends Controller
         return back();
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $comment = Comment::find($id);
         if ($comment) {
@@ -49,15 +49,9 @@ class AdminCommentController extends Controller
         return back()->withErrors('comment not found');
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        $comment = Comment::find($id);
-        if ($comment && $comment->getId() == $id) {
-            $comment->delete();
-
-            return redirect()->route('admin.comment.index');
-        }
-
-        return redirect()->withErrors('comment not found');
+        Comment::destroy($id);
+        return redirect()->route('admin.comment.index');
     }
 }

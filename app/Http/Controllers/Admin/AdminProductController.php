@@ -37,7 +37,7 @@ class AdminProductController extends Controller
         return back();
     }
 
-    public function edit($id)
+    public function edit(int $id)
     {
         $product = Product::find($id);
         if (! $product) {
@@ -51,7 +51,7 @@ class AdminProductController extends Controller
         return view('admin.product.edit')->with('viewData', $viewData);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $product = Product::findOrfail($id);  // Si el producto no existe, Laravel arrojará automáticamente una excepción.
 
@@ -81,15 +81,9 @@ class AdminProductController extends Controller
         return redirect()->route('admin.product.index');
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        $product = Product::find($id);
-        if ($product && $product->getId() == $id) {
-            $product->delete();
-
-            return redirect()->route('admin.product.index');
-        }
-
-        return back();
+        Product::destroy($id);
+        return redirect()->route('admin.product.index');
     }
 }

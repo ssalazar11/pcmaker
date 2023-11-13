@@ -24,6 +24,7 @@ Route::middleware('admin')->group(function () {
     Route::delete('/admin/products/delete/{id}', 'App\Http\Controllers\Admin\AdminProductController@destroy')->name('admin.product.delete');
 });
 
+Route::post('/comments/store', 'App\Http\Controllers\CommentController@store')->name('comment.store');
 Route::get('/products', 'App\Http\Controllers\ProductController@index')->name('product.index');
 Route::get('/products/{id}', 'App\Http\Controllers\ProductController@show')->name('product.show');
 Route::get('/cart', 'App\Http\Controllers\CartController@index')->name('cart.index');

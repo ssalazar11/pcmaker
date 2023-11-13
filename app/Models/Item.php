@@ -57,12 +57,12 @@ class Item extends Model
         return $this->attributes['created_at'];
     }
 
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt):void
     {
         $this->attributes['created_at'] = $createdAt;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt():string
     {
         return $this->attributes['updated_at'];
     }

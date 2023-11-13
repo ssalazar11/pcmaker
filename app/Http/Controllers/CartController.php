@@ -29,7 +29,7 @@ class CartController extends Controller
         return view('cart.index')->with('viewData', $viewData);
     }
 
-    public function add(Request $request, $id)
+    public function add(Request $request, int $id)
     {
         $products = $request->session()->get('products');
         $products[$id] = $request->input('quantity');

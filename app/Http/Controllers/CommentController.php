@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Comment;
 
 use Illuminate\Http\Request;
 
@@ -27,7 +28,13 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = new Comment();
+    $comment->setProductId($request->product_id); // Usando setProductId()
+    $comment->setUserId(auth()->id()); // Usando setUserId()
+    $comment->setText($request->text); // Usando setText()
+    $comment->save();
+
+    return back();
     }
 
     /**
