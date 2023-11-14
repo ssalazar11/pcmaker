@@ -24,6 +24,10 @@ RUN composer install \
     --no-scripts \
     --prefer-dist
 
+# Agregar Laravel UI y configurar Bootstrap con autenticación
+RUN composer require laravel/ui \
+    && php artisan ui bootstrap --auth --quiet
+
 # Configurar Laravel
 RUN php artisan key:generate
 RUN php artisan migrate
@@ -34,7 +38,7 @@ RUN a2enmod rewrite
 RUN service apache2 restart
 
 # Instalar Node.js y npm
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - # Asegúrate de usar la versión correcta de Node.js
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - 
 RUN apt-get install -y nodejs
 
 # Instalar dependencias de Node
