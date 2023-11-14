@@ -31,6 +31,7 @@ RUN composer require laravel/ui \
 # Configurar Laravel
 RUN php artisan key:generate
 RUN php artisan migrate
+RUN chmod -R 777 storage
 
 # Cambiar la propiedad de los directorios al usuario www-data
 RUN chown -R www-data:www-data /var/www/html
