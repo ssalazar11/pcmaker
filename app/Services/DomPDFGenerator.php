@@ -5,7 +5,7 @@
 namespace App\Services;
 
 use App\Contracts\PDFGeneratorInterface;
-use PDF; // Asegúrate de importar la fachada correcta
+use PDF;
 
 class DomPDFGenerator implements PDFGeneratorInterface {
     private $view;

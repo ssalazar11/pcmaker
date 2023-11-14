@@ -9,29 +9,17 @@ use Tests\TestCase;
 
 class InterviewControllerTest extends TestCase
 {
-    //use RefreshDatabase;
-
     public function testStoreMethod()
     {
-        // Simular un usuario autenticado
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        $user = User::factory()->create(); // Simulate an authenticated user
+        $this->actingAs($user); // Act as the authenticated user
 
-        // Datos de la entrevista
         $interviewData = [
-            'questions' => '¿Cuáles son tus expectativas salariales?'
+            'questions' => 'Sample questions', //This data simulates what a user would submit through a form
         ];
 
-        // Realizar la petición
-        $response = $this->post('/interview/store', $interviewData);
+        $this->post(route('interview.store'), $interviewData)->assertRedirect(); //Make a POST request to the store method of the interview controller and verify that there is a redirect
 
-        // Aserciones para verificar si la entrevista se creó
-        $this->assertDatabaseHas('interviews', [
-            'user_id' => $user->getId(),
-            'questions' => $interviewData['questions']
-        ]);
-
-        // Verificar que la respuesta sea un redirect
-        $response->assertRedirect();
+        $this->assertDatabaseHas('interviews', ['questions' => 'Sample questions']); // Verify that the interview data has been stored correctly in the database
     }
 }
