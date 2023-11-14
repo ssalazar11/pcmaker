@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/products', 'App\Http\Controllers\Api\ProductApiController@index')->name('api.product.index');
 Route::get('/products/paginate', 'App\Http\Controllers\Api\ProductApiController@paginate')->name('api.product.paginate');
 Route::get('/products/{id}', 'App\Http\Controllers\ProductController@show')->name('product.show');
+Route::get('/joke', 'App\Http\Controllers\JokeController@randomJoke')->name('api.joke');

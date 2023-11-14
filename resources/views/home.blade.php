@@ -68,6 +68,15 @@
                     </div>
                 </div>
             </div>
+            @if($joke)
+    <section>
+        <div class="container">
+            <h2>Random Joke</h2>
+            <p>{{ $joke['setup'] }}</p>
+            <p><em>{{ $joke['punchline'] }}</em></p>
+        </div>
+    </section>
+        @endif
         </div>
     </section>
 @endsection

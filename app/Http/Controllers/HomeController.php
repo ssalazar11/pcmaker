@@ -1,17 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Services\JokeService;
 
 class HomeController extends Controller
 {
+    protected $jokeService;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(JokeService $jokeService)
     {
         $this->middleware('auth');
+        $this->jokeService=$jokeService;
     }
 
     /**
@@ -21,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $joke=$this->jokeService->getRandomJoke();
+        return view('home', ['joke'=>$joke]);
     }
 }

@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\PDFGeneratorInterface;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class MyAccountController extends Controller
 {
+    protected $pdfGenerator;
+
+    public function __construct(PDFGeneratorInterface $pdfGenerator){
+        $this->pdfGenerator=$pdfGenerator;
+    }
+
     public function orders()
     {
         $viewData = [];
@@ -30,8 +37,7 @@ class MyAccountController extends Controller
 
     public function downloadInvoice(Order $order)
     {
-        $pdf = PDF::loadView('myaccount.invoice', ['order' => $order]);
-
-        return $pdf->download('invoice-'.$order->getId().'.pdf');
+        $this->pdfGenerator->loadView('myaccount.invoice', ['order'=>$order]);
+        return $this->pdfGenerator->download('invoice-'. $order->getId(). '.pdf');
     }
 }
