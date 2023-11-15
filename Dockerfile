@@ -11,6 +11,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Copiar archivos de la aplicación
 COPY . /var/www/html
+RUN chmod -R 777 /var/www/html
 COPY ./public/.htaccess /var/www/html/.htaccess
 
 # Establecer directorio de trabajo
@@ -30,7 +31,6 @@ RUN composer require laravel/ui \
 
 # Configurar Laravel
 RUN php artisan key:generate
-RUN php artisan migrate
 RUN chmod -R 777 storage
 
 # Habilitar mod_rewrite para Apache
