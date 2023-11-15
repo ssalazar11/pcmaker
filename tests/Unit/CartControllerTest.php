@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class CartControllerTest extends TestCase
 {
-    //use RefreshDatabase;
 
     public function testAddProductToCart()
     {
